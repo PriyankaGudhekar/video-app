@@ -1,0 +1,88 @@
+<div>
+  <br>
+  <div class="container pt-4" style="border: 1px solid gray;border-radius: 15px;">
+    <div style="text-align: center;background-color: #7fad39;color:white;padding: 10px;border-radius: 15px;">
+      <h2>My Play List</h2>
+    </div>
+    <br>
+
+    <div class="row">
+      <ul style="list-style: none;">
+        <li *ngFor="let vid of videoList; let i = index" class="vidlist">
+
+          <span style="cursor: pointer;font-size: 21px;" (click)="videoClicked(vid)">
+            <i class="fa fa-angle-right"></i>
+            {{vid.vid_name}}
+          </span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-12">
+      <div class="submit-button text-center">
+        <br>
+        <button class="site-btn" type="submit" (click)="addNew()">Add New</button>
+      </div>
+    </div>
+
+    <br>
+
+    <div *ngIf="showAddPage" class="row">
+      <div class="col-12 col-lg-6">
+        <div class="form-group" style="display: flex;">
+          <label style="width: 45%;margin-top: 5px;">Video Name <span style="color: red;">*</span></label>
+
+          <input type="text" class="form-control" placeholder="Your Video Name" (input)="nameCheck()"
+            [ngModelOptions]="{standalone: true}" [(ngModel)]="video_name">
+
+        </div>
+        <div *ngIf="video_name_err" style="margin-top: -17px;margin-bottom: 5px;">
+          <span class="form-error" style="color: red;margin-left: 165px;">{{video_name_err}}</span>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="form-group" style="display: flex;">
+          <label style="width: 45%;margin-top: 5px;">Video Description <span style="color: red;">*</span></label>
+
+          <input type="text" class="form-control" placeholder="Your Video Description" (input)="descCheck()"
+            [ngModelOptions]="{standalone: true}" [(ngModel)]="video_desc">
+
+        </div>
+        <div *ngIf="video_desc_err" style="margin-top: -17px;margin-bottom: 5px;">
+          <span class="form-error"
+            style="color: red;margin-left: 165px;">{{video_desc_err}}</span>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="form-group" style="display: flex;">
+          <label style="width: 45%;margin-top: 5px;">Video URL <span style="color: red;">*</span></label>
+
+          <input type="text" class="form-control" placeholder="Your Video URL" (input)="urlCheck()"
+            [ngModelOptions]="{standalone: true}" [(ngModel)]="video_url">
+
+        </div>
+        <div *ngIf="video_url_err" style="margin-top: -17px;margin-bottom: 5px;">
+          <span class="form-error" style="color: red;margin-left: 165px;">{{video_url_err}}</span>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="submit-button text-center">
+          <br>
+          <button class="site-btn" type="submit" (click)="saveVideo()">Save</button>
+          &nbsp;&nbsp;&nbsp;
+          <button class="site-btn" style="background-color: red;" type="submit" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+
+
+    </div>
+    <br>
+    <div *ngIf="showVideo">
+      <hr>
+
+      <iframe [src]="safeSrc" width="50%" height="315" style="margin-left: 25%;" frameborder="0" webkitallowfullscreen
+        mozallowfullscreen allowfullscreen></iframe>
+    </div>
+  </div>
+  <br>
+</div>
